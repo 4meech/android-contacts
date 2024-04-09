@@ -7,7 +7,7 @@ import java.util.List;
 import ru.yandex.practicum.contacts.model.ContactType;
 import ru.yandex.practicum.contacts.presentation.base.ListDiffInterface;
 
-public class ContactUi extends ListDiffInterface<ContactUi> {
+public class ContactUi implements ListDiffInterface<ContactUi> {
 
     private final String name;
     private final String phone;
@@ -43,19 +43,17 @@ public class ContactUi extends ListDiffInterface<ContactUi> {
     }
 
     @Override
-    public boolean theSameAs(@NonNull ContactUi t)
-    {
-        ContactUi oldItem = this;
-        return oldItem.hashCode() == t.hashCode();
+    public boolean theSameAs(ContactUi newItem) {
 
+        return this.hashCode() == newItem.hashCode();
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(Object anotherItem) {
+        if (this == anotherItem) return true;
+        if (anotherItem == null || getClass() != anotherItem.getClass()) return false;
 
-        ContactUi contact = (ContactUi) o;
+        ContactUi contact = (ContactUi) anotherItem;
 
         if (!name.equals(contact.name)) return false;
         if (!phone.equals(contact.phone)) return false;
